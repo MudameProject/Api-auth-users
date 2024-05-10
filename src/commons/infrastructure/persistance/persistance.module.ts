@@ -9,12 +9,12 @@ import { MongooseModule } from '@nestjs/mongoose';
     MongooseModule.forRootAsync({
       useFactory: (configService: ConfigType<typeof dbConfig>) => {
         const { db, env } = configService;
-        const uriDb =
+        const urlDb =
           env === 'local'
             ? `${db.connection}${db.host}/${db.name}`
             : `mongodb+srv://danielestebanjimenezlopez:c6nZDMfbdQFEQ3gM@test.laxdtla.mongodb.net/`;
         return {
-          uri: uriDb,
+          uri: urlDb,
         };
       },
       inject: [dbConfig.KEY],
