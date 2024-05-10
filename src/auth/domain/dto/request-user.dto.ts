@@ -29,6 +29,8 @@ export class registerUserDto {
   role: string;
 }
 
+// will be riview again this dto, is posible make change in this class with parse or omitType
+
 export class loginUserDto {
   @ApiProperty()
   @IsEmail()
