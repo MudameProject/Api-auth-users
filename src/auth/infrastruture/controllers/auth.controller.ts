@@ -5,7 +5,6 @@ import {
   registerUserDto,
   loginUserDto,
 } from '../../domain/dto/request-user.dto';
-import { UserDto } from 'src/commons/domain/dto/user.dto';
 import { User } from 'src/commons/domain/entities/user.entity';
 
 @ApiTags('autentication')
@@ -22,7 +21,7 @@ export class AuthController {
   }
 
   @Post('login')
-  loginUser(@Body() userObject: loginUserDto) {
-    console.log({ body: userObject });
+  async loginUser(@Body() userObject: loginUserDto) {
+    return await this.authService.loginUser(userObject);
   }
 }

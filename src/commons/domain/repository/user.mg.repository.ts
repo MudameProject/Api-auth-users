@@ -12,6 +12,10 @@ export class UserMongooseRepository implements UserRepository {
     return this.userModel.findOne({ username }).exec();
   }
 
+  findByEmail(email: string): Promise<User> {
+    return this.userModel.findOne({ email }).exec();
+  }
+
   async create(userDto: UserDto): Promise<User> {
     const existingUser = await this.userModel
       .findOne({ email: userDto.email })
