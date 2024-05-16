@@ -7,10 +7,10 @@ import { UserDto } from 'src/commons/domain/dto/user.dto';
 export class UserRepository implements ICrudUserRepository {
   constructor(
     @Inject(UserMongooseRepository)
-    private readonly ormProductRepository: IUserRepository,
+    private readonly userRepository: IUserRepository,
   ) {}
 
   async creates(newProduct: UserDto): Promise<void> {
-    await this.ormProductRepository.create(newProduct);
+    await this.userRepository.create(newProduct);
   }
 }
