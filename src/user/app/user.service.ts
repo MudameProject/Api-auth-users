@@ -14,6 +14,6 @@ export class ServiceUser implements IUserService {
 
   async creates(newUser: UserDto): Promise<IResponse> {
     await this.userRepository.creates(newUser);
-    return { message: 'Success', code: 200 };
+    return { message: 'Success', code: 200, user: newUser };
   }
 }

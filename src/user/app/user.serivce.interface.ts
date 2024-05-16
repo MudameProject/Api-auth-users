@@ -7,4 +7,5 @@ export interface IUserService {
 export interface IResponse {
   message: string;
   code: number;
+  user: any;
 }

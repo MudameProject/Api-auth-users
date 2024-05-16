@@ -7,7 +7,7 @@ import {
   IsOptional,
   IsString,
   Length,
-  Matches,
+  //Matches,
 } from '@nestjs/class-validator';
 import { Document } from 'mongoose';
 
@@ -23,7 +23,7 @@ export class User extends Document {
   @IsString()
   @Length(3, 50)
   @Prop({ required: true })
-  username?: string;
+  userName?: string;
 
   @IsEmail()
   @Transform(({ value }) => value.toLowerCase())
@@ -33,9 +33,9 @@ export class User extends Document {
   @IsNotEmpty()
   @IsString()
   @Length(8, 128)
-  @Matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/, {
-    message: 'password too weak',
-  })
+  // @Matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/, {
+  //   message: 'password too weak',
+  // })
   @Prop({ required: true })
   password: string;
 

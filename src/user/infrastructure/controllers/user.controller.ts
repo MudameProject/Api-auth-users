@@ -9,7 +9,7 @@ import { ServiceUser } from '../../app/user.service';
 export class UserController {
   constructor(private readonly userService: ServiceUser) {}
 
-  @Post()
+  @Post('create')
   create(@Body() createUserDto: UserDto) {
     return this.userService.creates(createUserDto);
   }
