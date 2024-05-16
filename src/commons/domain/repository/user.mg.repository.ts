@@ -3,24 +3,24 @@ import { Model } from 'mongoose';
 import { UserDto } from 'src/commons/domain/dto/user.dto';
 import { User } from '../entities/user.entity';
 import { InjectModel } from '@nestjs/mongoose';
-import { UserRepository } from './user.repository';
+import { IUserRepository } from './user.repository.interface';
 
 @Injectable()
-export class UserMongooseRepository implements UserRepository {
+export class UserMongooseRepository implements IUserRepository {
   constructor(@InjectModel(User.name) private userModel: Model<User>) {}
 
-  async create(userDto: UserDto): Promise<User> {
+  async create(newUserDto: UserDto): Promise<User> {
     const existingUser = await this.userModel
-      .findOne({ email: userDto.email })
+      .findOne({ email: newUserDto.email })
       .exec();
     if (existingUser) {
       throw new HttpException(
-        `User with email ${userDto.email} already exists`,
+        `User with email ${newUserDto.email} already exists`,
         HttpStatus.BAD_REQUEST,
       );
     }
 
-    const createdUser = new this.userModel(userDto);
+    const createdUser = new this.userModel(newUserDto);
     return createdUser.save();
   }
 }
