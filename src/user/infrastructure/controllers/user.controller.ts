@@ -1,18 +1,21 @@
-//import { Controller, Get, Post, Body, Param, Delete } from '@nestjs/common';
+import { Controller, Post, Body, Inject } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
-//import { UserDto } from '../../../commons/domain/dto/user.dto';
-import { UserService } from '../../app/user.service';
+import { UserDto } from '../../../commons/domain/dto/user.dto';
+import { ServiceUser } from '../../app/user.service';
+import { IUserService } from 'src/user/app/user.serivce.interface';
 
 @ApiTags('users')
 @ApiBearerAuth()
 //@Controller('user')
 export class UserController {
-  constructor(private readonly userService: UserService) {}
+  constructor(
+    @Inject(ServiceUser) private readonly userService: IUserService,
+  ) {}
 
-  // @Post()
-  // create(@Body() createUserDto: UserDto) {
-  //   return this.userService.createUser(createUserDto);
-  // }
+  @Post('create')
+  create(@Body() createUserDto: UserDto) {
+    return this.userService.creates(createUserDto);
+  }
 
   // @Get()
   // findAll() {
