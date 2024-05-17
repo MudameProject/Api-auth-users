@@ -8,6 +8,13 @@ import { IUserRepository } from './user.repository.interface';
 @Injectable()
 export class UserMongooseRepository implements IUserRepository {
   constructor(@InjectModel(User.name) private userModel: Model<User>) {}
+  findByUsername(username: string): Promise<User> {
+    return this.userModel.findOne({ username }).exec();
+  }
+
+  findByEmail(email: string): Promise<User> {
+    return this.userModel.findOne({ email }).exec();
+  }
 
   async create(newUserDto: UserDto): Promise<User> {
     const existingUser = await this.userModel
