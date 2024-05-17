@@ -3,13 +3,13 @@ import { AuthService } from '../services/auth.service';
 import { AuthController } from '../../infrastruture/controllers/auth.controller';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { PassportModule } from '@nestjs/passport';
-import { JwtModule } from '@nestjs/jwt';
+import { JwtModule, JwtService } from '@nestjs/jwt';
 import { PersistanceModule } from 'src/commons/infrastructure/persistance/persistance.module';
-import { UserMongooseRepository } from 'src/commons/domain/repository/user.mg.repository';
+import { AuthRepository } from '../repository/auth.repository';
 
 @Module({
   controllers: [AuthController],
-  providers: [AuthService, UserMongooseRepository],
+  providers: [AuthService, AuthRepository, JwtService],
   imports: [
     ConfigModule,
     PassportModule.register({ defaultStrategy: 'jwt' }),

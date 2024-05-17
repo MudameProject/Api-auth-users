@@ -3,14 +3,15 @@ import { hash, compare } from 'bcrypt';
 import { registerUserDto, loginUserDto } from '../dto/request-user.dto';
 import { ResponseUserDto } from '../dto/response-user.dto';
 import { UserDto } from 'src/commons/domain/dto/user.dto';
-import { UserMongooseRepository } from 'src/commons/domain/repository/user.mg.repository';
+//import { UserMongooseRepository } from 'src/commons/domain/repository/user.mg.repository';
+import { IAuthRepository } from '../repository/auth.interface';
 import { User } from 'src/commons/domain/entities/user.entity';
 import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class AuthService {
   constructor(
-    private readonly userRepository: UserMongooseRepository,
+    private readonly userRepository: IAuthRepository,
     private readonly jwtService: JwtService,
   ) {}
 
