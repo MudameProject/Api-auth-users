@@ -3,10 +3,10 @@ import { Model } from 'mongoose';
 import { UserDto } from 'src/commons/domain/dto/user.dto';
 import { User } from '../entities/user.entity';
 import { InjectModel } from '@nestjs/mongoose';
-import { UserRepository } from './user.repository';
+import { IUserRepository } from './user.repository';
 
 @Injectable()
-export class UserMongooseRepository implements UserRepository {
+export class UserMongooseRepository implements IUserRepository {
   constructor(@InjectModel(User.name) private userModel: Model<User>) {}
   findByUsername(username: string): Promise<User> {
     return this.userModel.findOne({ username }).exec();

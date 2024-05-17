@@ -1,4 +1,4 @@
-import { HttpException, Injectable } from '@nestjs/common';
+import { HttpException, Inject, Injectable } from '@nestjs/common';
 import { hash, compare } from 'bcrypt';
 import { registerUserDto, loginUserDto } from '../dto/request-user.dto';
 import { ResponseUserDto } from '../dto/response-user.dto';
@@ -7,16 +7,19 @@ import { UserDto } from 'src/commons/domain/dto/user.dto';
 import { IAuthRepository } from '../repository/auth.interface';
 import { User } from 'src/commons/domain/entities/user.entity';
 import { JwtService } from '@nestjs/jwt';
+import { AuthRepository } from '../repository/auth.repository';
+import { IAuthService } from './auth.service.interface';
 
 @Injectable()
-export class AuthService {
+export class AuthService implements IAuthService {
   constructor(
-    private readonly userRepository: IAuthRepository,
+    @Inject(AuthRepository)
+    private readonly authRepository: IAuthRepository,
     private readonly jwtService: JwtService,
   ) {}
 
-  async registerUser(userObject: registerUserDto): Promise<User> {
-    const existingUser = await this.userRepository.findByUsername(
+  async register(userObject: registerUserDto): Promise<User> {
+    const existingUser = await this.authRepository.findByUsername(
       userObject.username,
     );
     if (existingUser) {
@@ -30,15 +33,15 @@ export class AuthService {
     newUser.username = userObject.username;
     newUser.password = plainToHash;
 
-    const createdUser = await this.userRepository.create(newUser);
+    const createdUser = await this.authRepository.create(newUser);
     console.log(createdUser);
     return createdUser;
   }
 
-  async loginUser(userObject: loginUserDto): Promise<ResponseUserDto> {
+  async login(userObject: loginUserDto): Promise<ResponseUserDto> {
     console.log(userObject);
 
-    const existingUser = await this.userRepository.findByEmail(
+    const existingUser = await this.authRepository.findByEmail(
       userObject.email,
     );
     console.log(existingUser);
