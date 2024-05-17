@@ -6,7 +6,7 @@ import { IUserService } from 'src/user/app/user.serivce.interface';
 
 @ApiTags('users')
 @ApiBearerAuth()
-//@Controller('user')
+@Controller('user')
 export class UserController {
   constructor(
     @Inject(ServiceUser) private readonly userService: IUserService,

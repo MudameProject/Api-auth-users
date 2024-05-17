@@ -30,7 +30,7 @@ export class AuthService implements IAuthService {
 
     const newUser: UserDto = new UserDto();
     newUser.email = userObject.email;
-    newUser.username = userObject.username;
+    newUser.userName = userObject.username;
     newUser.password = plainToHash;
 
     const createdUser = await this.authRepository.create(newUser);

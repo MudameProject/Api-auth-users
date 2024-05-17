@@ -6,7 +6,6 @@ import { ServiceUser } from './app/user.service';
 import { UserRepository } from './domain/repository/user.repository';
 import { UserMongooseRepository } from 'src/commons/domain/repository/user.mg.repository';
 
-@Controller()
 @Module({
   imports: [
     MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]),
