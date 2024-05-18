@@ -8,8 +8,8 @@ import { IUserRepository } from './user.repository.interface';
 @Injectable()
 export class UserMongooseRepository implements IUserRepository {
   constructor(@InjectModel(User.name) private userModel: Model<User>) {}
-  findByUsername(username: string): Promise<User> {
-    return this.userModel.findOne({ username }).exec();
+  findByUsername(userName: string): Promise<User> {
+    return this.userModel.findOne({ userName }).exec();
   }
 
   findByEmail(email: string): Promise<User> {

@@ -7,7 +7,7 @@ async function bootstrap() {
   const port = process.env.PORT || 3000;
 
   const config = new DocumentBuilder()
-    .setTitle('Library_PRO API')
+    .setTitle('API-AUTH-USER')
     .setDescription(
       'The library API is a simple manager system that allows you to manage books and authors.',
     )
