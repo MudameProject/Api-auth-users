@@ -13,7 +13,7 @@ import { UserSchema } from 'src/commons/domain/entities/user.entity';
       useFactory: (configService: ConfigType<typeof dbConfig>) => {
         const { db, env } = configService;
         const urlDb =
-          env === 'loca'
+          env === 'local'
             ? `${db.connection}${db.host}/${db.name}`
             : `mongodb+srv://angelriverarf:6tNvR5cNR0vfisnQ@pruebita.xbcxzti.mongodb.net/`;
         return {

@@ -3,6 +3,6 @@ import { UserDto } from '../../../commons/domain/dto/user.dto';
 
 export interface IAuthRepository {
   findByEmail(email: string): Promise<User | null>;
-  findByUsername(username: string): Promise<User | null>;
+  findByUsername(userName: string): Promise<User | null>;
   create(UserDto: UserDto): Promise<User>;
 }

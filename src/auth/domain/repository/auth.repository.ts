@@ -11,8 +11,8 @@ export class AuthRepository implements IAuthRepository {
     @Inject(UserMongooseRepository)
     private readonly authRepository: IUserRepository,
   ) {}
-  async findByUsername(username: string): Promise<User> {
-    return await this.authRepository.findByUsername(username);
+  async findByUsername(userName: string): Promise<User> {
+    return await this.authRepository.findByUsername(userName);
   }
   async findByEmail(email: string): Promise<User> {
     return await this.authRepository.findByEmail(email);
